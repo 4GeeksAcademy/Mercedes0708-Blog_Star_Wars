@@ -11,7 +11,7 @@ export const Starships = ()=>{
         <h1>Starships</h1>
             <div className="row">
             {store.starships.map((elm, index)=>{
-                return <Card key= {index} title={elm.name} id={index+1} path={"/detailsstarships/" + index +1} urlImg= {`https://starwars-visualguide.com/assets/img/starships/${index+1}.jpg`}/>
+                return <Card key= {index} title={elm.name} id={index+1} path={`/detailsstarships/${index +1}`} urlImg= {`https://starwars-visualguide.com/assets/img/starships/${index+1}.jpg`}/>
             })}
                 
             </div>

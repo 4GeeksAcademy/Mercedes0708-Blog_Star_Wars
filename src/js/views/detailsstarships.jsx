@@ -5,7 +5,7 @@ export const DetailsStarships = ()=>{
     const { id } = useParams();
     const [starship, setstarship] = useState({});
 
-    useEffect(() => {
+   useEffect(() => {
         fetch("https://swapi.dev/api/starships/" + id)
           .then((response) => response.json())
           .then((data) => {
@@ -13,14 +13,17 @@ export const DetailsStarships = ()=>{
             setstarship(data.result);
           })
           .catch((error) => console.log(error));
-      }, []);
+      }, []); 
 
       
-    return (<>
+    return (
+    <h1 className=""> por fin </h1>
+    )
+    /* (<>
     <div className="container">
         <div className="row">
             <div className="col">
-                <img src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2020/07/star-wars-death-star-earth.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5" width={800}/>
+                <img src="" />
             </div>
 
             <div className="col">
@@ -56,5 +59,5 @@ export const DetailsStarships = ()=>{
         </tbody>
     </table>
     
-    </>)
+    </>) */
 }

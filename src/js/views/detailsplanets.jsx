@@ -1,60 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, {useContext, useState} from "react";
+import { Link, useParams } from "react-router-dom";
+import { Context } from "../store/appContext.js";
 
-export const DetailsPlanets = ()=>{
-    const { id } = useParams();
-    const [planet, setPlanet] = useState({});
 
-    useEffect(() => {
-        fetch("https://swapi.dev/api/planets/" + id)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            setPlanet(data.result);
-          })
-          .catch((error) => console.log(error));
-      }, []);
 
-      
-    return (<>
-    <div className="container">
-        <div className="row">
-            <div className="col">
-                <img src={urlImg} onError={handleOnError} className="card-img-top" alt="..."/>
-            </div>
+export const DetailsPlanets = () => {
+    const { store, actions } = useContext(Context);
+    const { detailsplanets} = store
+    const params = useParams();
+    const id = params.id;
 
-            <div className="col">
-                <h1>{planet?.properties?.name}</h1>
-                <p>{planet?.description}</p>
+    const handleOnError = (event)=> {
+        event.target.src = "https://starwars-visualguide.com/assets/img/placeholder.jpg"
+      }
+
+    return (
+        <div className="card text-light bg-dark m-3" style={{width : "540px;"}}>
+            <div className="row g-0">
+                <div className="col-md-4">
+                    <img onError={handleOnError} src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} className="img-fluid rounded-start" alt="..."/>
+                </div>
+                <div className="col-md-8">
+                    <div className="card-body">
+                        <h4 className="card-title">{detailsplanets.name}</h4>
+                        <p className="card-text"><b>Diameter: </b>{detailsplanets.diameter}</p>
+                        <p className="card-text"><b>Rotation: </b>{detailsplanets.rotation_period}</p>
+                        <p className="card-text"><b>Orbita: </b>{detailsplanets.orbital_period}</p>
+                        <p className="card-text"><b>Gravity: </b>{detailsplanets.gravity}</p>
+                        <p className="card-text"><b>Population: </b>{detailsplanets.population}</p>
+                        <p className="card-text"><b>Climate: </b>{detailsplanets.climate}</p>
+                        <p className="card-text"><b>Water Surface: </b>{detailsplanets.surface_water}</p>
+                        
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-      
-      <table className="table my-5">
-        <thead>
-          <tr>
-            <th scope="col">Diameter</th>
-            <th scope="col">Rotation Period</th>
-            <th scope="col">Orbital_Period</th>
-            <th scope="col">Gravity</th>
-            <th scope="col">Population</th>
-            <th scope="col">Climate</th>
-            <th scope="col">Terrain</th>
-          </tr>
-        </thead>
-        
-        <tbody>
-            <tr>            
-                <td>{planet?.properties?.diameter}</td>
-                <td>{planet?.properties?.rotation_period}</td>
-                <td>{planet?.properties?.orbital_period}</td>
-                <td>{planet?.properties?.gravity}</td>
-                <td>{planet?.properties?.population}</td>
-                <td>{planet?.properties?.climate}</td>
-                <td>{planet?.properties?.terrain}</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    </>)
+    )
 }
