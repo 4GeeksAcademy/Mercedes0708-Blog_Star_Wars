@@ -30,17 +30,17 @@ export const Navbar = () => {
                                 <a className="nav-link" href="#">Starships</a>
                             </Link>
                         </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link" href="#" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Favorites
+                        <li className="nav-item dropdown btn btn-black">
+                            <a className="nav-link " href="#" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                                Favorites {store.favorites.length}
                             </a>
-                            <ul className="dropdown-menu">
+                            <ul className="lista dropdown-menu dropdown-menu-end bg-primary">
                                 {store.favorites.map((value, index) => {
                                     return (
-                                        <li key={index} className="dropdown-item">
+                                        <li key={index} className="dropdown-item ">
                                             {value.name}
                                             <button // Utiliza un botón regular en lugar de un enlace
-                                                className="btn btn-danger"
+                                                className="btn btn-danger ml-5"
                                                 onClick={() => {
                                                     actions.deleteFav(value.id);
                                                 }}
@@ -51,7 +51,7 @@ export const Navbar = () => {
                                     );
                                 })}
                             </ul>
-                        </li>
+                        </li> 
                     </ul>
                 </div>
             </div>
